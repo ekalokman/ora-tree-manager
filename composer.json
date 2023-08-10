@@ -31,7 +31,7 @@
   },
   "autoload": {
     "psr-4": {
-      "kartik\\tree\\": "src"
+      "ekalokman\\tree\\": "src"
     }
   },
   "extra": {

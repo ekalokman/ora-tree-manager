@@ -6,9 +6,9 @@
  * @version   1.1.3
  */
 
-namespace kartik\tree;
+namespace ekalokman\tree;
 
-use kartik\base\AssetBundle;
+use ekalokman\base\AssetBundle;
 
 /**
  * Asset bundle for the [[TreeViewInput]] widget.
@@ -22,7 +22,7 @@ class TreeViewInputAsset extends AssetBundle
      * @inheritdoc
      */
     public $depends = [
-        'kartik\tree\TreeViewAsset'
+        'ekalokman\tree\TreeViewAsset'
     ];
 
     /**
