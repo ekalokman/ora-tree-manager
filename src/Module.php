@@ -31,7 +31,7 @@ use yii\web\Application as WebApplication;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since  1.0
  */
-class Module extends \ekalokman\base\Module
+class Module extends \kartik\base\Module
 {
     /**
      * @var string module name for the Krajee Tree management module

@@ -9,7 +9,7 @@
 namespace ekalokman\tree;
 
 use Exception;
-use ekalokman\base\Lib;
+use kartik\base\Lib;
 use ekalokman\tree\models\Tree;
 use Yii;
 use yii\helpers\Html;

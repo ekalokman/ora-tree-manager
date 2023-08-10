@@ -10,8 +10,8 @@ namespace ekalokman\tree;
 
 use Closure;
 use Exception;
-use ekalokman\base\Config;
-use ekalokman\base\Lib;
+use kartik\base\Config;
+use kartik\base\Lib;
 use kartik\base\Widget;
 use kartik\dialog\Dialog;
 use ekalokman\tree\models\Tree;

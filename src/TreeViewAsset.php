@@ -8,7 +8,7 @@
 
 namespace ekalokman\tree;
 
-use ekalokman\base\AssetBundle;
+use kartik\base\AssetBundle;
 
 /**
  * Asset bundle for the [[TreeView]] widget.

@@ -10,7 +10,7 @@ namespace ekalokman\tree\controllers;
 
 use Closure;
 use Exception;
-use ekalokman\base\Lib;
+use kartik\base\Lib;
 use ekalokman\tree\Module;
 use ekalokman\tree\models\Tree;
 use ekalokman\tree\TreeView;
