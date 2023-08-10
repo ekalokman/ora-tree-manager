@@ -6,11 +6,11 @@
  * @version   1.1.3
  */
 
-namespace ekalokman\tree;
+namespace kartik\tree;
 
 use Exception;
 use kartik\base\Lib;
-use ekalokman\tree\models\Tree;
+use kartik\tree\models\Tree;
 use Yii;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
@@ -26,7 +26,7 @@ use yii\web\View;
  * For example,
  *
  * ```php
- * use ekalokman\tree\TreeViewInput;
+ * use kartik\tree\TreeViewInput;
  * echo TreeViewInput::widget([
  *     // single query fetch to render the tree
  *     'query'             => Tree::find()->addOrderBy('root, lft'),

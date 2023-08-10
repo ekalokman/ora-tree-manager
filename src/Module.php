@@ -6,7 +6,7 @@
  * @version   1.1.3
  */
 
-namespace ekalokman\tree;
+namespace kartik\tree;
 
 use Yii;
 use yii\helpers\Url;
@@ -23,7 +23,7 @@ use yii\web\Application as WebApplication;
  * ```php
  * 'modules' => [
  *    'treemanager' =>  [
- *         'class' => '\ekalokman\tree\Module',
+ *         'class' => '\kartik\tree\Module',
  *         // other module settings, refer detailed documentation
  *     ]
  * ]
@@ -85,7 +85,7 @@ class Module extends \kartik\base\Module
     public $dataStructure = [];
 
     /**
-     * @var string the name to identify the nested set behavior name in the [[\ekalokman\tree\models\Tree]] model.
+     * @var string the name to identify the nested set behavior name in the [[\kartik\tree\models\Tree]] model.
      */
     public $treeBehaviorName = 'tree';
 

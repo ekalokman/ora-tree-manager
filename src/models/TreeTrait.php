@@ -6,11 +6,11 @@
  * @version   1.1.3
  */
 
-namespace ekalokman\tree\models;
+namespace kartik\tree\models;
 
 use creocoder\nestedsets\NestedSetsBehavior;
-use ekalokman\tree\Module;
-use ekalokman\tree\TreeView;
+use kartik\tree\Module;
+use kartik\tree\TreeView;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -90,7 +90,7 @@ trait TreeTrait
      * You may override this method to return a customized query. For example,
      *
      * ```php
-     * use ekalokman\tree\models\Tree;
+     * use kartik\tree\models\Tree;
      *
      * class CustomTree extends Tree
      * {
@@ -105,7 +105,7 @@ trait TreeTrait
      * The following code shows how to apply a default condition for all queries:
      *
      * ```php
-     * use ekalokman\tree\models\Tree;
+     * use kartik\tree\models\Tree;
      *
      * class CustomTree extends Tree
      * {

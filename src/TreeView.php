@@ -6,7 +6,7 @@
  * @version   1.1.3
  */
 
-namespace ekalokman\tree;
+namespace kartik\tree;
 
 use Closure;
 use Exception;
@@ -14,7 +14,7 @@ use kartik\base\Config;
 use kartik\base\Lib;
 use kartik\base\Widget;
 use kartik\dialog\Dialog;
-use ekalokman\tree\models\Tree;
+use kartik\tree\models\Tree;
 use Yii;
 use yii\base\InvalidConfigException;
 use kartik\base\PluginAssetBundle;
@@ -31,7 +31,7 @@ use yii\helpers\Html;
  * For example,
  *
  * ```php
- * use ekalokman\tree\TreeView;
+ * use kartik\tree\TreeView;
  * echo TreeView::widget([
  *     // single query fetch to render the tree
  *     'query'             => Tree::find()->addOrderBy('root, lft'),
@@ -1413,7 +1413,7 @@ HTML;
         if (empty($class) || !is_subclass_of($class, ActiveRecord::class)) {
             throw new InvalidConfigException("The 'query' must be implemented using 'ActiveRecord::find()' method.");
         }
-        $trait = 'ekalokman\tree\models\TreeTrait';
+        $trait = 'kartik\tree\models\TreeTrait';
         if (!self::usesTrait($class, $trait)) {
             throw new InvalidConfigException(
                 "The model class '{$class}' for the 'query' must use the trait '{$trait}' or extend from '" .

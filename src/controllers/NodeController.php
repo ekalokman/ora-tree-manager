@@ -6,15 +6,15 @@
  * @version   1.1.3
  */
 
-namespace ekalokman\tree\controllers;
+namespace kartik\tree\controllers;
 
 use Closure;
 use Exception;
 use kartik\base\Lib;
-use ekalokman\tree\Module;
-use ekalokman\tree\models\Tree;
-use ekalokman\tree\TreeView;
-use ekalokman\tree\TreeSecurity;
+use kartik\tree\Module;
+use kartik\tree\models\Tree;
+use kartik\tree\TreeView;
+use kartik\tree\TreeSecurity;
 use Yii;
 use yii\base\ErrorException;
 use yii\base\Event;

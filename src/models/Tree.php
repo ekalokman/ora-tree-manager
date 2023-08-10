@@ -6,7 +6,7 @@
  * @version   1.1.3
  */
 
-namespace ekalokman\tree\models;
+namespace kartik\tree\models;
 
 use yii\db\ActiveRecord;
 
@@ -25,7 +25,7 @@ use yii\db\ActiveRecord;
  *
  * use Yii;
  *
- * class Tree extends \ekalokman\tree\models\Tree
+ * class Tree extends \kartik\tree\models\Tree
  * {
  *
  *     public static function tableName()
@@ -78,7 +78,7 @@ class Tree extends ActiveRecord
 
     /**
      * @var string the classname for the TreeQuery that implements the NestedSetQueryBehavior.
-     * If not set this will default to `ekalokman\tree\models\TreeQuery`.
+     * If not set this will default to `kartik\tree\models\TreeQuery`.
      */
     public static $treeQueryClass;
 

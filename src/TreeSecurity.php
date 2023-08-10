@@ -6,10 +6,10 @@
  * @version   1.1.3
  */
 
-namespace ekalokman\tree;
+namespace kartik\tree;
 
 use Closure;
-use ekalokman\tree\models\Tree;
+use kartik\tree\models\Tree;
 use Yii;
 use yii\base\InvalidCallException;
 use yii\base\InvalidConfigException;
