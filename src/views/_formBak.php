@@ -189,8 +189,6 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
     }
 
     $nameField = $showNameAttribute ? $form->field($node, $nameAttribute)->textInput($inputOpts) : '';
-
-    // $nameField = $showNameAttribute ? $form->field($node, $nameAttribute)->textInput(['disabled' => true]) : '';
     ?>
     <?php
     /**
@@ -254,45 +252,45 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
         <?php if ($showIDAttribute && $showNameAttribute): ?>
             <div class="row">
                 <div class="col-sm-4">
-                    <!-- ?= $keyField ?> -->
+                    <?= $keyField ?>
                 </div>
                 <div class="col-sm-8">
-                    <!-- ?= $nameField ?> -->
+                    <?= $nameField ?>
                 </div>
             </div>
         <?php else: ?>
-            <!-- ?= $keyField ?> -->
-            <!-- ?= $nameField ?> -->
+            <?= $keyField ?>
+            <?= $nameField ?>
         <?php endif; ?>
         <?php if ($iconsListShow === 'text'): ?>
             <div class="row">
-                <!-- <div class="col-sm-4">
-                    ?= $form->field($node, $iconTypeAttribute)->dropdownList([
+                <div class="col-sm-4">
+                    <?= $form->field($node, $iconTypeAttribute)->dropdownList([
                         TreeView::ICON_CSS => 'CSS Suffix',
                         TreeView::ICON_RAW => 'Raw Markup',
                         ], $inputOpts) ?>
-                </div> -->
-                <!-- <div class="col-sm-8">
-                    ?= $form->field($node, $iconAttribute)->textInput($inputOpts) ?>
-                </div> -->
+                </div>
+                <div class="col-sm-8">
+                    <?= $form->field($node, $iconAttribute)->textInput($inputOpts) ?>
+                </div>
             </div>
         <?php endif; ?>
     <?php else: ?>
         <div class="row">
             <div class="col-sm-6">
-                <!-- ?= $keyField ?> -->
-                <!-- ?= Html::activeHiddenInput($node, $iconTypeAttribute) ?> -->
-                <!-- ?= $nameField ?> -->
+                <?= $keyField ?>
+                <?= Html::activeHiddenInput($node, $iconTypeAttribute) ?>
+                <?= $nameField ?>
             </div>
-            <!-- <div class="col-sm-6">
-                ?= /** @noinspection PhpUndefinedMethodInspection */
+            <div class="col-sm-6">
+                <?= /** @noinspection PhpUndefinedMethodInspection */
                 $form->field($node, $iconAttribute)->radioList($iconsList, [
                     'class' => 'form-control',
                     'style' => 'height:135px; overflow-y:auto',
                     'custom' => true,
                     'disabled' => !empty($inputOpts['READONLY']) || !empty($inputOpts['DISABLED']),
                 ]) ?>
-            </div> -->
+            </div>
         </div>
     <?php endif; ?>
 

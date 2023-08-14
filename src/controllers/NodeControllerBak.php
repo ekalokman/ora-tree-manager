@@ -15,8 +15,6 @@ use kartik\tree\Module;
 use kartik\tree\models\Tree;
 use kartik\tree\TreeView;
 use kartik\tree\TreeSecurity;
-use backend\models\QstStRequirements;
-use backend\models\QstStTreeReqTree;
 use Yii;
 use yii\base\ErrorException;
 use yii\base\Event;
@@ -166,13 +164,11 @@ class NodeController extends Controller
             $successMsg = Yii::t('kvtree', 'Saved the {node} details successfully.', $nodeTitles);
             $errorMsg = Yii::t('kvtree', 'Error while saving the {node}. Please try again later.', $nodeTitles);
         }
-
         $node->activeOrig = $node->ACTIVE;
         $node->visibleOrig = $node->VISIBLE;
         $node->disabledOrig = $node->DISABLED;
         $isNewRecord = $node->isNewRecord;
         $node->load($post);
-
         $errors = $success = false;
         if (Yii::$app->has('session')) {
             $session = Yii::$app->session;
@@ -195,27 +191,12 @@ class NodeController extends Controller
                 }
             }
         }
-
-        $selectId = $node->REQ_ID;
-        $req = QstStRequirements::find()->where(["REQ_ID"=>$selectId])->one();
-        $selectedTitle = $req->TITLE;
-        $node->NAME = $selectedTitle;
-        // $tree->save();
-
         if ($node->save()) {
             // check if active status was changed
             if (!$isNewRecord && $node->activeOrig != $node->ACTIVE || !$isNewRecord && $node->visibleOrig != $node->VISIBLE || !$isNewRecord && $node->disabledOrig != $node->DISABLED) {
                 if ($node->ACTIVE || $node->VISIBLE || $node->DISABLED) {
                     $success = $node->activateNode(false);
                     $errors = $node->nodeActivationErrors;
-
-                    // $selectedName = $node->NAME;
-                    // $req = QstStRequirements::find()->where(["TITLE"=>$selectedName])->one();
-                    // $selectedId = $req->REQ_ID;
-                    // $tree = QstStTreeReqTree::find()->where(["NAME"=>$selectedName])->one();
-                    // $tree->REQ_ID = $selectedId;
-                    // $tree->save();
-
                 } else {
                     $success = $node->removeNode(true, false); // only deactivate the node(s)
                     $errors = $node->nodeRemovalErrors;
