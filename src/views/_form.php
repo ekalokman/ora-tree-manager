@@ -152,7 +152,8 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
         if ($node->isNewRecord) {
             $options['value'] = Yii::t('kvtree', '(new)');
         }
-        $keyField = $form->field($node, $keyAttribute)->textInput($options);
+        // $keyField = $form->field($node, $keyAttribute)->textInput($options);
+        $keyField = $form->field($node, $keyAttribute)->hiddenInput($options)->label(false);
     } else {
         $keyField = Html::activeHiddenInput($node, $keyAttribute);
     }
@@ -254,14 +255,14 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
         <?php if ($showIDAttribute && $showNameAttribute): ?>
             <div class="row">
                 <div class="col-sm-4">
-                    <!-- ?= $keyField ?> -->
+                    <?= $keyField ?>
                 </div>
                 <div class="col-sm-8">
                     <!-- ?= $nameField ?> -->
                 </div>
             </div>
         <?php else: ?>
-            <!-- ?= $keyField ?> -->
+            <?= $keyField ?>
             <!-- ?= $nameField ?> -->
         <?php endif; ?>
         <?php if ($iconsListShow === 'text'): ?>
@@ -280,7 +281,7 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
     <?php else: ?>
         <div class="row">
             <div class="col-sm-6">
-                <!-- ?= $keyField ?> -->
+                <?= $keyField ?>
                 <!-- ?= Html::activeHiddenInput($node, $iconTypeAttribute) ?> -->
                 <!-- ?= $nameField ?> -->
             </div>
