@@ -253,14 +253,14 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
     ?>
     <?php if ($iconsListShow == 'text' || $iconsListShow == 'none'): ?>
         <?php if ($showIDAttribute && $showNameAttribute): ?>
-            <div class="row">
+            <!-- <div class="row"> -->
                 <!-- <div class="col-sm-4"> -->
                     <?= $keyField ?>
                 <!-- </div> -->
                 <!-- <div class="col-sm-8">
                     ?= $nameField ?>
                 </div> -->
-            </div>
+            <!-- </div> -->
         <?php else: ?>
             <?= $keyField ?>
             <!-- ?= $nameField ?> -->
