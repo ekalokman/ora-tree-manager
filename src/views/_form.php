@@ -254,12 +254,12 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
     <?php if ($iconsListShow == 'text' || $iconsListShow == 'none'): ?>
         <?php if ($showIDAttribute && $showNameAttribute): ?>
             <div class="row">
-                <div class="col-sm-4">
+                <!-- <div class="col-sm-4"> -->
                     <?= $keyField ?>
-                </div>
-                <div class="col-sm-8">
-                    <!-- ?= $nameField ?> -->
-                </div>
+                <!-- </div> -->
+                <!-- <div class="col-sm-8">
+                    ?= $nameField ?>
+                </div> -->
             </div>
         <?php else: ?>
             <?= $keyField ?>
@@ -280,11 +280,11 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
         <?php endif; ?>
     <?php else: ?>
         <div class="row">
-            <div class="col-sm-6">
+            <!-- <div class="col-sm-6"> -->
                 <?= $keyField ?>
                 <!-- ?= Html::activeHiddenInput($node, $iconTypeAttribute) ?> -->
                 <!-- ?= $nameField ?> -->
-            </div>
+            <!-- </div> -->
             <!-- <div class="col-sm-6">
                 ?= /** @noinspection PhpUndefinedMethodInspection */
                 $form->field($node, $iconAttribute)->radioList($iconsList, [
