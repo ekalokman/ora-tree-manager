@@ -197,7 +197,7 @@ class NodeController extends Controller
         }
 
         $selectId = $node->REQ_ID;
-        $req = QstStRequirements::find()->where(["REQ_ID"=>$selectId])->one();
+        $req = QstSpRequirements::find()->where(["REQ_ID"=>$selectId])->one();
         $selectedTitle = $req->TITLE;
         $node->NAME = $selectedTitle;
         // $tree->save();
@@ -210,7 +210,7 @@ class NodeController extends Controller
                     $errors = $node->nodeActivationErrors;
 
                     // $selectedName = $node->NAME;
-                    // $req = QstStRequirements::find()->where(["TITLE"=>$selectedName])->one();
+                    // $req = QstSpRequirements::find()->where(["TITLE"=>$selectedName])->one();
                     // $selectedId = $req->REQ_ID;
                     // $tree = QstStTreeReqTree::find()->where(["NAME"=>$selectedName])->one();
                     // $tree->REQ_ID = $selectedId;
