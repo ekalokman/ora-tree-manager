@@ -15,7 +15,7 @@ use kartik\tree\Module;
 use kartik\tree\models\Tree;
 use kartik\tree\TreeView;
 use kartik\tree\TreeSecurity;
-use backend\models\QstStRequirements;
+use backend\models\QstSpRequirements;
 use backend\models\QstStTreeReqTree;
 use Yii;
 use yii\base\ErrorException;
