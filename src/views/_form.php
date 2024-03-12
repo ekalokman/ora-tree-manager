@@ -148,7 +148,7 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
      * the primary key input field
      */
     if ($showIDAttribute) {
-        $options = ['READONLY' => true];
+        $options = ['readonly' => true];
         if ($node->isNewRecord) {
             $options['value'] = Yii::t('kvtree', '(new)');
         }
@@ -180,13 +180,13 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
         }
     }
     if ($node->isReadonly()) {
-        $inputOpts['READONLY'] = true;
+        $inputOpts['readonly'] = true;
     }
     if ($node->isDisabled()) {
-        $inputOpts['DISABLED'] = true;
+        $inputOpts['disabled'] = true;
     }
     if ($node->isLeaf()) {
-        $flagOptions['DISABLED'] = true;
+        $flagOptions['disabled'] = true;
     }
 
     $nameField = $showNameAttribute ? $form->field($node, $nameAttribute)->textInput($inputOpts) : '';
@@ -199,7 +199,7 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
      */
     ?>
     <div class="kv-detail-heading">
-        <?php if (empty($inputOpts['DISABLED']) || ($isAdmin && $showFormButtons)): ?>
+        <?php if (empty($inputOpts['disabled']) || ($isAdmin && $showFormButtons)): ?>
             <div style="float:right">
                 <?= Html::resetButton(
                     ArrayHelper::getValue($nodeViewButtonLabels, 'reset', $resetTitle),
@@ -291,7 +291,7 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
                     'class' => 'form-control',
                     'style' => 'height:135px; overflow-y:auto',
                     'custom' => true,
-                    'disabled' => !empty($inputOpts['READONLY']) || !empty($inputOpts['DISABLED']),
+                    'disabled' => !empty($inputOpts['readonly']) || !empty($inputOpts['disabled']),
                 ]) ?>
             </div> -->
         </div>
@@ -326,23 +326,23 @@ $icons = is_array($iconsList) ? array_values($iconsList) : $iconsList;
         ?>
         <div class="row">
             <div class="col-sm-4">
-                <?= $form->field($node, 'ACTIVE')->checkbox($cbxOptions) ?>
-                <?= $form->field($node, 'VISIBLE')->checkbox($cbxOptions) ?>
-                <?= $form->field($node, 'READONLY')->checkbox($cbxOptions) ?>
-                <?= $form->field($node, 'DISABLED')->checkbox($cbxOptions) ?>
-                <?= $form->field($node, 'CHILD_ALLOWED')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'active')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'visible')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'readonly')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'disabled')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'child_allowed')->checkbox($cbxOptions) ?>
             </div>
             <div class="col-sm-4">
-                <?= $form->field($node, 'SELECTED')->checkbox($cbxOptions) ?>
-                <?= $form->field($node, 'COLLAPSED')->checkbox($flagOptions) ?>
-                <?= $form->field($node, 'REMOVABLE')->checkbox($cbxOptions) ?>
-                <?= $form->field($node, 'REMOVABLE_ALL')->checkbox($flagOptions) ?>
+                <?= $form->field($node, 'selected')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'collapsed')->checkbox($flagOptions) ?>
+                <?= $form->field($node, 'removable')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'removable_all')->checkbox($flagOptions) ?>
             </div>
             <div class="col-sm-4">
-                <?= $form->field($node, 'MOVABLE_U')->checkbox($cbxOptions) ?>
-                <?= $form->field($node, 'MOVABLE_D')->checkbox($cbxOptions) ?>
-                <?= $form->field($node, 'MOVABLE_L')->checkbox($cbxOptions) ?>
-                <?= $form->field($node, 'MOVABLE_R')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'movable_u')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'movable_d')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'movable_l')->checkbox($cbxOptions) ?>
+                <?= $form->field($node, 'movable_r')->checkbox($cbxOptions) ?>
             </div>
         </div>
 

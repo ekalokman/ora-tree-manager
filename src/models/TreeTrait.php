@@ -26,30 +26,30 @@ trait TreeTrait
      * @var array the list of boolean value attributes
      */
     public static $boolAttribs = [
-        'ACTIVE',
-        'SELECTED',
-        'DISABLED',
-        'READONLY',
-        'VISIBLE',
-        'COLLAPSED',
-        'MOVABLE_U',
-        'MOVABLE_D',
-        'MOVABLE_L',
-        'MOVABLE_R',
-        'REMOVABLE',
-        'REMOVABLE_ALL',
-        'CHILD_ALLOWED',
+        'active',
+        'selected',
+        'disabled',
+        'readonly',
+        'visible',
+        'collapsed',
+        'movable_u',
+        'movable_d',
+        'movable_l',
+        'movable_r',
+        'removable',
+        'removable_all',
+        'child_allowed',
     ];
 
     /**
      * @var array the default list of boolean attributes with initial value = `false`
      */
     public static $falseAttribs = [
-        'SELECTED',
-        'DISABLED',
-        'READONLY',
-        'COLLAPSED',
-        'REMOVABLE_ALL',
+        'selected',
+        'disabled',
+        'readonly',
+        'collapsed',
+        'removable_all',
     ];
 
     /**
@@ -339,7 +339,7 @@ trait TreeTrait
      */
     public function isActive()
     {
-        return $this->parse('ACTIVE');
+        return $this->parse('active');
     }
 
     /**
@@ -349,7 +349,7 @@ trait TreeTrait
      */
     public function isSelected()
     {
-        return $this->parse('SELECTED', false);
+        return $this->parse('selected', false);
     }
 
     /**
@@ -359,7 +359,7 @@ trait TreeTrait
      */
     public function isVisible()
     {
-        return $this->parse('VISIBLE');
+        return $this->parse('visible');
     }
 
     /**
@@ -369,7 +369,7 @@ trait TreeTrait
      */
     public function isReadonly()
     {
-        return $this->parse('READONLY');
+        return $this->parse('readonly');
     }
 
     /**
@@ -379,7 +379,7 @@ trait TreeTrait
      */
     public function isDisabled()
     {
-        return $this->parse('DISABLED');
+        return $this->parse('disabled');
     }
 
     /**
@@ -389,7 +389,7 @@ trait TreeTrait
      */
     public function isCollapsed()
     {
-        return $this->parse('COLLAPSED');
+        return $this->parse('collapsed');
     }
 
     /**
@@ -412,7 +412,7 @@ trait TreeTrait
      */
     public function isRemovable()
     {
-        return $this->parse('REMOVABLE');
+        return $this->parse('removable');
     }
 
     /**
@@ -422,7 +422,7 @@ trait TreeTrait
      */
     public function isRemovableAll()
     {
-        return $this->parse('REMOVABLE_ALL');
+        return $this->parse('removable_all');
     }
 
     /**
@@ -432,7 +432,7 @@ trait TreeTrait
      */
     public function isChildAllowed()
     {
-        return $this->parse('CHILD_ALLOWED');
+        return $this->parse('child_allowed');
     }
 
     /**
@@ -572,19 +572,19 @@ trait TreeTrait
             $depthAttribute => Yii::t('kvtree', 'Depth'),
             $iconAttribute => Yii::t('kvtree', 'Icon'),
             $iconTypeAttribute => Yii::t('kvtree', 'Icon Type'),
-            'ACTIVE' => Yii::t('kvtree', 'Active'),
-            'SELECTED' => Yii::t('kvtree', 'Selected'),
-            'DISABLED' => Yii::t('kvtree', 'Disabled'),
-            'READONLY' => Yii::t('kvtree', 'Read Only'),
-            'VISIBLE' => Yii::t('kvtree', 'Visible'),
-            'COLLAPSED' => Yii::t('kvtree', 'Collapsed'),
-            'MOVABLE_U' => Yii::t('kvtree', 'Movable Up'),
-            'MOVABLE_D' => Yii::t('kvtree', 'Movable Down'),
-            'MOVABLE_L' => Yii::t('kvtree', 'Movable Left'),
-            'MOVABLE_R' => Yii::t('kvtree', 'Movable Right'),
-            'REMOVABLE' => Yii::t('kvtree', 'Removable'),
-            'REMOVABLE_ALL' => Yii::t('kvtree', 'Removable (with children)'),
-            'CHILD_ALLOWED' => Yii::t('kvtree', 'Child Allowed'),
+            'active' => Yii::t('kvtree', 'Active'),
+            'selected' => Yii::t('kvtree', 'Selected'),
+            'disabled' => Yii::t('kvtree', 'Disabled'),
+            'readonly' => Yii::t('kvtree', 'Read Only'),
+            'visible' => Yii::t('kvtree', 'Visible'),
+            'collapsed' => Yii::t('kvtree', 'Collapsed'),
+            'movable_u' => Yii::t('kvtree', 'Movable Up'),
+            'movable_d' => Yii::t('kvtree', 'Movable Down'),
+            'movable_l' => Yii::t('kvtree', 'Movable Left'),
+            'movable_r' => Yii::t('kvtree', 'Movable Right'),
+            'removable' => Yii::t('kvtree', 'Removable'),
+            'removable_all' => Yii::t('kvtree', 'Removable (with children)'),
+            'child_allowed' => Yii::t('kvtree', 'Child Allowed'),
         ];
         if (!$treeAttribute) {
             $labels[$treeAttribute] = Yii::t('kvtree', 'Root');
