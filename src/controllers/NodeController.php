@@ -167,9 +167,9 @@ class NodeController extends Controller
             $errorMsg = Yii::t('kvtree', 'Error while saving the {node}. Please try again later.', $nodeTitles);
         }
 
-        $node->activeOrig = $node->ACTIVE;
-        $node->visibleOrig = $node->VISIBLE;
-        $node->disabledOrig = $node->DISABLED;
+        $node->activeOrig = $node->active;
+        $node->visibleOrig = $node->visible;
+        $node->disabledOrig = $node->disabled;
         $isNewRecord = $node->isNewRecord;
         $node->load($post);
 
@@ -196,24 +196,24 @@ class NodeController extends Controller
             }
         }
 
-        $selectId = $node->REQ_ID;
-        $req = QstSpRequirements::find()->where(["REQ_ID"=>$selectId])->one();
-        $selectedTitle = $req->TITLE;
-        $node->NAME = $selectedTitle;
+        $selectId = $node->req_id;
+        $req = QstSpRequirements::find()->where(["req_id"=>$selectId])->one();
+        $selectedTitle = $req->title;
+        $node->name = $selectedTitle;
         // $tree->save();
 
         if ($node->save()) {
             // check if active status was changed
-            if (!$isNewRecord && $node->activeOrig != $node->ACTIVE || !$isNewRecord && $node->visibleOrig != $node->VISIBLE || !$isNewRecord && $node->disabledOrig != $node->DISABLED) {
-                if ($node->ACTIVE || $node->VISIBLE || $node->DISABLED) {
+            if (!$isNewRecord && $node->activeOrig != $node->active || !$isNewRecord && $node->visibleOrig != $node->visible || !$isNewRecord && $node->disabledOrig != $node->disabled) {
+                if ($node->active || $node->visible || $node->disabled) {
                     $success = $node->activateNode(false);
                     $errors = $node->nodeActivationErrors;
 
-                    // $selectedName = $node->NAME;
+                    // $selectedName = $node->name;
                     // $req = QstSpRequirements::find()->where(["TITLE"=>$selectedName])->one();
-                    // $selectedId = $req->REQ_ID;
-                    // $tree = QstStTreeReqTree::find()->where(["NAME"=>$selectedName])->one();
-                    // $tree->REQ_ID = $selectedId;
+                    // $selectedId = $req->req_id;
+                    // $tree = QstStTreeReqTree::find()->where(["name"=>$selectedName])->one();
+                    // $tree->req_id = $selectedId;
                     // $tree->save();
 
                 } else {

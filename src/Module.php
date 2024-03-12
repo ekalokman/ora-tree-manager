@@ -126,16 +126,16 @@ class Module extends \kartik\base\Module
         $this->_msgCat = 'kvtree';
         parent::init();
         $this->treeStructure += [
-            'treeAttribute' => 'ROOT',
-            'leftAttribute' => 'LFT',
-            'rightAttribute' => 'RGT',
-            'depthAttribute' => 'LVL',
+            'treeAttribute' => 'root',
+            'leftAttribute' => 'lft',
+            'rightAttribute' => 'rgt',
+            'depthAttribute' => 'lvl',
         ];
         $this->dataStructure += [
-            'keyAttribute' => 'ID',
-            'nameAttribute' => 'NAME',
-            'iconAttribute' => 'ICON',
-            'iconTypeAttribute' => 'ICON_TYPE',    
+            'keyAttribute' => 'id',
+            'nameAttribute' => 'name',
+            'iconAttribute' => 'icon',
+            'iconTypeAttribute' => 'icon_type',    
         ];
         $nodeActions = ArrayHelper::getValue($this->treeViewSettings, 'nodeActions', []);
         if (Yii::$app instanceof WebApplication) {
