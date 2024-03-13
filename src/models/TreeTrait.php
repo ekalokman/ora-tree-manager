@@ -457,9 +457,9 @@ trait TreeTrait
                 /**
                  * @var Tree $child
                  */
-                $child->ACTIVE = true;
-                $child->VISIBLE = $this->VISIBLE;
-                $child->DISABLED = $this->DISABLED;
+                $child->active = true;
+                $child->visible = $this->visible;
+                $child->disabled = $this->disabled;
                 if (!$child->save()) {
                     /** @noinspection PhpUndefinedVariableInspection */
                     $this->nodeActivationErrors[] = [
@@ -471,7 +471,7 @@ trait TreeTrait
             }
         }
         if ($currNode) {
-            $this->ACTIVE = true;
+            $this->active = true;
             if (!$this->save()) {
                 /** @noinspection PhpUndefinedVariableInspection */
                 $this->nodeActivationErrors[] = [
@@ -507,7 +507,7 @@ trait TreeTrait
             if ($this->isRemovableAll()) {
                 $children = $this->children()->all();
                 foreach ($children as $child) {
-                    $child->ACTIVE = false;
+                    $child->active = false;
                     if (!$child->save()) {
                         /** @noinspection PhpUndefinedVariableInspection */
                         $this->nodeRemovalErrors[] = [
@@ -519,7 +519,7 @@ trait TreeTrait
                 }
             }
             if ($currNode) {
-                $this->ACTIVE = false;
+                $this->active = false;
                 if (!$this->save()) {
                     /** @noinspection PhpUndefinedVariableInspection */
                     $this->nodeRemovalErrors[] = [
