@@ -899,7 +899,7 @@ HTML;
             self::BTN_CREATE => [
                 'icon' => 'plus',
                 'alwaysDisabled' => false, // set this property to `true` to force disable the button always
-                'options' => ['title' => Yii::t('kvtree', 'Add new'), 'disabled' => true],
+                'options' => ['title' => Yii::t('kvtree', 'Add new'), 'disabled' => false],
             ],
             self::BTN_CREATE_ROOT => [
                 'icon' => $this->fontAwesome ? 'tree' : 'tree-conifer',
