@@ -200,6 +200,7 @@ class NodeController extends Controller
         $req = QstSpRequirements::find()->where(["req_id"=>$selectId])->one();
         $selectedTitle = $req->title;
         $node->name = $selectedTitle;
+        // $node->curiculum_code = $selectedTitle;
         // $tree->save();
 
         if ($node->save()) {
