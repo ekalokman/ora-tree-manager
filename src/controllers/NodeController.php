@@ -15,8 +15,10 @@ use kartik\tree\Module;
 use kartik\tree\models\Tree;
 use kartik\tree\TreeView;
 use kartik\tree\TreeSecurity;
+use study\models\QstSpRequirements;
 use study\models\QstSpTreeRequirement;
-use study\models\QstStTreeReqTree;
+use study\models\FdwAcRequirements;
+
 use Yii;
 use yii\base\ErrorException;
 use yii\base\Event;
@@ -197,25 +199,67 @@ class NodeController extends Controller
         }
 
         $selectId = $node->req_id;
+        $pack_id = $node->curiculum_code;
         $req = QstSpRequirements::find()->where(["req_id"=>$selectId])->one();
         $selectedTitle = $req->title;
         $node->name = $selectedTitle;
         // $node->curiculum_code = $selectedTitle;
         // $tree->save();
 
+
         if ($node->save()) {
+
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                $rootIdOnTreeReqPg = $node->root;
+                $reqRoot = QstSpTreeRequirement::find()->where(["id"=>$rootIdOnTreeReqPg])->one();
+                $titleRoot = $reqRoot->name;
+
+                $oraReqRoot = FdwAcRequirements::find()
+                    ->where(['curiculum_code'=>$pack_id])
+                    ->andWhere(['title'=>$titleRoot])
+                    ->one();
+
+                // Get the last CODE in Oracle
+                $lastCode = FdwAcRequirements::find()
+                    ->select(['code'])
+                    ->where(['curiculum_code'=>$pack_id])
+                    ->orderBy(['code' => SORT_DESC])
+                    ->one();
+
+                $requirement = QstSpRequirements::find()
+                    ->where(['req_id'=>$selectId])
+                    ->one();
+
+                // Start the new code based on the last retrieved code, or start from 1 if not set
+                $newCode = $lastCode ? intval($lastCode->code) + 1 : 1;
+
+                $OraUiaRequirementChild = new FdwAcRequirements();
+                $OraUiaRequirementChild->curiculum_code = $pack_id;
+                $OraUiaRequirementChild->title = $selectedTitle;
+                $OraUiaRequirementChild->code = str_pad($newCode++, 5, '0', STR_PAD_LEFT); // Increment CODE and format to 5 digits
+                $OraUiaRequirementChild->sub_code = $oraReqRoot->code;
+                $OraUiaRequirementChild->got_subjects = $requirement->got_subjects;
+                $OraUiaRequirementChild->credit_req = $requirement->credit_req;
+                $OraUiaRequirementChild->c_sessi = $requirement->c_sessi;
+                $OraUiaRequirementChild->c_semester = $requirement->c_semester;
+                $OraUiaRequirementChild->preset = $requirement->preset;
+                $OraUiaRequirementChild->priority = $requirement->priority;
+                $OraUiaRequirementChild->preset_type = $requirement->preset_type;
+                $OraUiaRequirementChild->course_type = $requirement->course_type;
+                $OraUiaRequirementChild->category_type = $requirement->category_type;
+
+                if (!$OraUiaRequirementChild->save()) {
+                    throw new \Exception('Failed to save in Oracle for Child: ' . json_encode($OraUiaRequirement->getErrors()));
+                }
+
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             // check if active status was changed
             if (!$isNewRecord && $node->activeOrig != $node->active || !$isNewRecord && $node->visibleOrig != $node->visible || !$isNewRecord && $node->disabledOrig != $node->disabled) {
                 if ($node->active || $node->visible || $node->disabled) {
                     $success = $node->activateNode(false);
                     $errors = $node->nodeActivationErrors;
-
-                    // $selectedName = $node->name;
-                    // $req = QstSpRequirements::find()->where(["TITLE"=>$selectedName])->one();
-                    // $selectedId = $req->req_id;
-                    // $tree = QstStTreeReqTree::find()->where(["name"=>$selectedName])->one();
-                    // $tree->req_id = $selectedId;
-                    // $tree->save();
 
                 } else {
                     $success = $node->removeNode(true, false); // only deactivate the node(s)
@@ -236,6 +280,9 @@ class NodeController extends Controller
         } else {
             $errorMsg = '<ul style="margin:0"><li>' . implode('</li><li>', $node->getFirstErrors()) . '</li></ul>';
         }
+
+
+
         if (Yii::$app->has('session')) {
             $session->set(ArrayHelper::getValue($post, 'nodeSelected', 'kvNodeId'), $node->{$keyAttr});
             if ($success) {
@@ -331,6 +378,27 @@ class NodeController extends Controller
              * @var Tree $node
              */
             $node = $treeClass::findOne($id);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            $reqRoot = QstSpTreeRequirement::find()->where(["id"=>$id])->one();
+            $titleRoot = $reqRoot->name;
+            $pack_id = $reqRoot->curiculum_code;
+
+            $oraReqRoot = FdwAcRequirements::find()
+                ->where(['curiculum_code'=>$pack_id])
+                ->andWhere(['title'=>$titleRoot])
+                ->one();
+
+            Yii::$app->db->createCommand()
+            ->delete('fdw_ac_dev.requirements', [
+                'curiculum_code' => $pack_id,
+                'code' => $oraReqRoot->code
+            ])
+            ->execute();
+                
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             return $node->removeNode($out['softDelete']);
         };
         return self::process(
