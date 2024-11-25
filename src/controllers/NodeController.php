@@ -434,9 +434,9 @@ class NodeController extends Controller
                 ->one();
 
             Yii::$app->db->createCommand()
-            ->delete('fdw_ac_dev.requirements', [
+            ->delete(FdwAcRequirements::tableName(), [
                 'curiculum_code' => $pack_id,
-                'code' => $oraReqRoot->code
+                'code' => $oraReqRoot->code,
             ])
             ->execute();
                 
