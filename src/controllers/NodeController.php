@@ -203,19 +203,26 @@ class NodeController extends Controller
         $req = QstSpRequirements::find()->where(["req_id"=>$selectId])->one();
         $selectedTitle = $req->title;
         $node->name = $selectedTitle;
-        // $node->curiculum_code = $selectedTitle;
-        // $tree->save();
 
+        // Get the state before save
+        $isNewRecord = $node->isNewRecord;
 
+        // If updating, get the existing record details
+        if (!$isNewRecord) {
+            $existingNode = QstSpTreeRequirement::findOne($node->id);
+            if (!$existingNode) {
+                throw new \Exception("Node with ID {$node->id} not found.");
+            }
+        }
+
+        // Save the node
         if ($node->save()) {
+
+            if ($isNewRecord) {
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 if($node->lft == '1'){
-
-                    $rootIdOnTreeReqPg = $node->root;
-                    $reqRoot = QstSpTreeRequirement::find()->where(["id"=>$rootIdOnTreeReqPg])->one();
-                    $titleRoot = $reqRoot->name;
 
                     // Get the last CODE in Oracle
                     $lastCode = FdwAcRequirements::find()
@@ -247,7 +254,7 @@ class NodeController extends Controller
                     $OraUiaRequirementChild->category_type = $requirement->category_type;
 
                     if (!$OraUiaRequirementChild->save()) {
-                        throw new \Exception('Failed to save in Oracle for Child: ' . json_encode($OraUiaRequirement->getErrors()));
+                        throw new \Exception('Failed to save in Oracle for Child: ' . json_encode($OraUiaRequirementChild->getErrors()));
                     }
 
                 }else{
@@ -291,12 +298,56 @@ class NodeController extends Controller
                     $OraUiaRequirementChild->category_type = $requirement->category_type;
 
                     if (!$OraUiaRequirementChild->save()) {
-                        throw new \Exception('Failed to save in Oracle for Child: ' . json_encode($OraUiaRequirement->getErrors()));
+                        throw new \Exception('Failed to save in Oracle for Child: ' . json_encode($OraUiaRequirementChild->getErrors()));
                     }
 
                 }
 
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////
+            }else{
+
+                $title = $existingNode->name;
+
+                // Get the current data in Oracle
+                $currCodeReqOra = FdwAcRequirements::find()
+                    ->select(['code'])
+                    ->where(['curiculum_code' => $pack_id])
+                    ->andWhere(['title' => $title])
+                    ->one();
+
+                $requirement = QstSpRequirements::find()
+                    ->where(['req_id'=>$selectId])
+                    ->one();
+
+                if (!$currCodeReqOra || !$currCodeReqOra->code) {
+                    throw new \Exception('Failed to find matching record in FdwAcRequirements.');
+                }
+                
+                $OraUiaRequirementChild = FdwAcRequirements::find()
+                    ->where(['curiculum_code' => $pack_id])
+                    ->andWhere(['code' => $currCodeReqOra->code])
+                    ->one();
+
+                if (!$OraUiaRequirementChild->updateAttributes([
+                    'title' => $selectedTitle,
+                    'got_subjects' => $requirement->got_subjects,
+                    'credit_req' => $requirement->credit_req,
+                    'c_sessi' => $requirement->c_sessi,
+                    'c_semester' => $requirement->c_semester,
+                    'preset' => $requirement->preset,
+                    'priority' => $requirement->priority,
+                    'preset_type' => $requirement->preset_type,
+                    'course_type' => $requirement->course_type,
+                    'category_type' => $requirement->category_type,
+                ], [
+                    'curiculum_code' => $pack_id,
+                    'code' => $currCodeReqOra->code,
+                ])) {
+                    throw new \Exception('Failed to update Oracle record: ' . json_encode($OraUiaRequirementChild->getErrors()));
+                }
+
+            }
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             // check if active status was changed
             if (!$isNewRecord && $node->activeOrig != $node->active || !$isNewRecord && $node->visibleOrig != $node->visible || !$isNewRecord && $node->disabledOrig != $node->disabled) {
